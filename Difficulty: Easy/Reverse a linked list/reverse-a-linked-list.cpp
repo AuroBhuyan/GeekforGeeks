@@ -38,21 +38,27 @@ struct Node
 
 */
 
+
 class Solution {
   public:
+  
+  void reversell(Node* &head,Node* prev,Node* curr){
+    if(curr==NULL){
+        head = prev;
+        return;
+    }
+    
+    Node* forward = curr->next;
+    reversell(head,curr,forward);
+    curr->next = prev;
+}
+
+  
     Node* reverseList(struct Node* head) {
         Node* prev = NULL;
         Node* curr = head;
-        Node* next = NULL;
-        
-        while(curr){
-            next = curr->next;
-            curr->next = prev;
-            prev = curr;
-            curr = next;
-        }
-        
-        return prev;
+        reversell(head,prev,curr);
+        return head;
     }
 };
 
